@@ -1,0 +1,21 @@
+# ===================== cLogP Calculation with RDKit =====================
+# This script calculates the octanol-water partition coefficient (cLogP)
+# for a given peptide SMILES string using RDKit.
+
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+
+# Example peptide SMILES string (replace with your target peptide)
+peptide_smiles = "CC(C)C[C@H](NC(=O)CN).......C(=O)NO)N[C@H](CCC(C)C)C(=O)O"
+
+# Convert SMILES to RDKit Mol object
+mol = Chem.MolFromSmiles(peptide_smiles)
+
+if mol:
+    # Calculate cLogP (octanol-water partition coefficient)
+    clogp = Descriptors.MolLogP(mol)
+    # Print result with 4 decimal places
+    print(f"cLogP (Hydrophobicity): {clogp:.4f}")
+else:
+    # Error handling for invalid SMILES
+    print("Error: Invalid SMILES string, please check and re-enter!")
